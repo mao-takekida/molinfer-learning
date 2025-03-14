@@ -1,0 +1,69 @@
+[project]
+name = "mol-infer-private"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "rdkit>=2024.9.5",
+    "scikit-learn>=1.6.1",
+    "tqdm>=4.67.1",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.1.0",
+    "pytest>=8.3.4",
+    "pytest-cov>=6.0.0",
+    "ruff>=0.9.5",
+]
+
+# -- Ruff configuration --
+[tool.ruff]
+line-length = 119
+# 大量のエラーが出るため除外
+exclude = [
+    "src/2LMM-LLR",
+    "src/module_1/HPS",
+    "src/module_1/chi-parameter",
+    "src/module_1/2LCC",
+    "src/module_1/polymer",
+    "src/module_2/",
+    "src/module_3/2LCC",
+    "src/module_3/multimodel",
+    "src/module_3/chi-parameter",
+    "src/module_3/polymer",
+    "src/module_4",
+]
+
+[tool.ruff.lint]
+# チェック対象ルール
+# https://www.pydocstyle.org/en/5.0.1/error_codes.html
+select = ["ALL"]
+ignore = [
+    "ANN401", # Dynamically typed expressions (typing.Any) are disallowed
+    "COM812", # flake8-commas "Trailing comma missing"
+    "D200", # One-line docstring should fit on one line with quotes
+    "D203", # 1 blank line required before class docstring
+    "D212", # Multi-line docstring summary should start at the first line
+    "D400", # First line should end with a period
+    "D401", # First line should be in imperative mood
+    "D415", # First line should end with a period, question mark, or exclamation point
+    "RUF001", # カタカナの"ノ"を使うと警告が出る
+    "RUF002", # カタカナの"ノ"を使うと警告が出る
+    "RUF003", # カタカナの"ノ"を使うと警告が出る
+]
+
+[tool.ruff.lint.per-file-ignores]
+# テスト時は `S101` (assert文の使用) を無視
+"test/**/*.py" = ["S101"]
+
+# Formatterの設定
+[tool.ruff.format]
+# フォーマット対象ルール
+quote-style = "double"
+indent-style = "space"
+
+# pytest
+[tool.pytest.ini_options]
+pythonpath = ["src"]
