@@ -14,8 +14,8 @@ def setup_logging() -> logging.Logger:
 
     """
     log_formatter = colorlog.ColoredFormatter(
-        "%(log_color)s%(asctime)s-[%(levelname)s]-%(message)s",
-        datefmt="%Y/%m/%d %H:%M:%S",
+        "%(log_color)s%(asctime)s [%(levelname)s] %(filename)s:%(lineno)d - %(message)s",
+        datefmt="%Y-%m-%dT%H:%M:%S",
     )
     console_handler = logging.StreamHandler()
     console_handler.setFormatter(log_formatter)
