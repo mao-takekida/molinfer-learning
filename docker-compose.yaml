@@ -1,12 +1,19 @@
 version: '3.8'  # 使用するDocker Composeのバージョン
 
 services:
-  web:
+
+  # backend
+  fast-api:  # サービス名
     build: ./backend  # ビルドするDockerfileの場所
     ports:
       - "8000:8000"  # ホストの8000番ポートとコンテナの8000番ポートを紐づけ
     volumes:
       - ./backend/src:/app/src  # ホストマシンとコンテナの/appディレクトリを同期
-    environment:
-      - ENV=development
-    container_name: fastapi # コンテナ名
+    container_name: fast-api-container  # コンテナ名
+  
+  # frontend
+  nextjs: # サービス名
+    build: ./frontend # ビルドするDockerfileの場所
+    ports:
+      - "3000:3000" # ホストの3000番ポートとコンテナの3000番ポートを紐づけ
+    container_name: nextjs-container # コンテナ名

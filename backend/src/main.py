@@ -2,16 +2,37 @@
 
 import logging
 
+import colorlog
 from fastapi import FastAPI, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, RedirectResponse
 
-# ロギング設定
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+# 色付きのログフォーマットを設定
+log_formatter = colorlog.ColoredFormatter(
+    "%(log_color)s%(asctime)s - <%(name)s> - [%(levelname)s] - %(message)s",  # ログのフォーマット
+    datefmt="%Y/%m/%d|%H:%M:%S",  # 日付のフォーマット
+)
 
-# logger format
-logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+# ログハンドラを作成
+console_handler = logging.StreamHandler()
+
+# ハンドラにフォーマットを設定
+console_handler.setFormatter(log_formatter)
+
+# ログハンドラを作成
+console_handler = logging.StreamHandler()
+
+# ハンドラにフォーマットを設定
+console_handler.setFormatter(log_formatter)
+
+# ロガーを作成
+logger = logging.getLogger()
+# ログレベルを設定
+logger.setLevel(logging.DEBUG)
+
+# ハンドラをロガーに追加
+logger.addHandler(console_handler)
+
 
 app = FastAPI()
 
