@@ -26,5 +26,6 @@ repos:
       entry: ./backend/.venv/bin/pytest
       language: system
       types: [python]
-      stages: [pre-push]
+      stages:
+      - pre-push
       pass_filenames: false
