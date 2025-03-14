@@ -2,13 +2,20 @@
 
 ```bash
 # docker-compose で起動
-docker compose up --build
-# コンテナ(fastapi)に入る
-docker compose exec fastapi bash
+docker compose up
+
+# コンテナに入る
+docker compose exec fast-api bash
+docker compose exec nextjs bash
+
+# ログを確認
+docker compose logs -f fast-api
+docker compose logs -f nextjs
 ```
 
-http://127.0.0.1:8000 にアクセスすると、APIドキュメントが表示されます。
-また、http://127.0.0.1:8000/docs にアクセスすると、Swagger UIが表示されます。
+http://127.0.0.1:3000 にアクセスすると、Next.jsのページが表示されます。
+http://127.0.0.1:8000 にアクセスすると、Swagger UIが表示されます。
+
 
 # 開発用設定
 
