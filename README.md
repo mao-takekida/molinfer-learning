@@ -1,10 +1,10 @@
 # docker で FastAPI
 
 ```bash
-# docker file からイメージを作成
-docker build -t mol-infer-learning .
-# イメージからコンテナを作成
-docker run --rm -p 8000:8000 mol-infer-learning
+# docker-compose で起動
+docker compose up --build
+# コンテナ(web)に入る
+docker compose exec web bash
 ```
 
 http://127.0.0.1:8000 にアクセスすると、APIドキュメントが表示されます。

@@ -1,0 +1,12 @@
+version: '3.8'  # 使用するDocker Composeのバージョン
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"  # ホストの8000番ポートとコンテナの8000番ポートを紐づけ
+    volumes:
+      - .:/app  # ホストマシンとコンテナの/appディレクトリを同期
+    environment:
+      - ENV=development
+    container_name: fastapi # コンテナ名
