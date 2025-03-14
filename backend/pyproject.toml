@@ -61,7 +61,7 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 # テスト時は `S101` (assert文の使用) を無視
-"test/**/*.py" = ["S101"]
+"tests/**/*.py" = ["S101"]
 
 # Formatterの設定
 [tool.ruff.format]
