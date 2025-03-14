@@ -1,31 +1,10 @@
 """FastAPI application for file upload handling."""
 
-import logging
-
-import colorlog
 from fastapi import FastAPI, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, RedirectResponse
 
-
-def setup_logging() -> logging.Logger:
-    """
-    Set up logging with color formatting.
-
-    Returns:
-        logging.Logger: Configured logger instance
-
-    """
-    log_formatter = colorlog.ColoredFormatter(
-        "%(log_color)s%(asctime)s - <%(name)s> - [%(levelname)s] - %(message)s",
-        datefmt="%Y/%m/%d|%H:%M:%S",
-    )
-    console_handler = logging.StreamHandler()
-    console_handler.setFormatter(log_formatter)
-    logger = logging.getLogger()
-    logger.setLevel(logging.DEBUG)
-    logger.addHandler(console_handler)
-    return logger
+from .log_config import app_logger
 
 
 def setup_cors(app: FastAPI) -> None:
@@ -40,7 +19,6 @@ def setup_cors(app: FastAPI) -> None:
 
 
 # アプリケーションの初期化
-logger = setup_logging()
 app = FastAPI(
     title="File Upload API",
     description="API for handling file uploads with FastAPI",
@@ -68,8 +46,8 @@ async def upload_file(file: UploadFile | None = None) -> JSONResponse:
 
     """
     if file is None:
-        logger.warning("No file uploaded")
+        app_logger.warning("No file uploaded")
         return JSONResponse(content={"message": "No file uploaded"}, status_code=400)
 
-    logger.info("File uploaded: %s", file.filename)
+    app_logger.info("File uploaded: %s", file.filename)
     return JSONResponse(content={"filename": file.filename})
