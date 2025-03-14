@@ -17,6 +17,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "httpx>=0.28.1",
     "pre-commit>=4.1.0",
     "pytest>=8.3.4",
     "pytest-cov>=6.0.0",
@@ -61,7 +62,7 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 # テスト時は `S101` (assert文の使用) を無視
-"test/**/*.py" = ["S101"]
+"tests/**/*.py" = ["S101"]
 
 # Formatterの設定
 [tool.ruff.format]

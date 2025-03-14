@@ -5,5 +5,5 @@ uv でパッケージ管理を行っています。
 ## pre-commit
 
 ```zsh
-uv run pre-commit install
+uv run pre-commit install --hook-type pre-commit --hook-type pre-push
 ```
