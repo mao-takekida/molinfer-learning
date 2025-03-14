@@ -14,4 +14,4 @@ RUN uv sync
 COPY src ./src
 
 # FastAPI サーバーを起動
-CMD ["uv", "run", "uvicorn", "src.backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uv", "run", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
