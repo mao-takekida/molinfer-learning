@@ -65,7 +65,7 @@ def test_upload_file_success(client: TestClient) -> None:
     file = BytesIO(file_content)
 
     response = client.post(
-        "/uploadfile/",
+        "/api/file/",
         files={"file": ("test.txt", file, "text/plain")},
     )
     expected_code = 200
@@ -81,7 +81,7 @@ def test_upload_file_no_file(client: TestClient) -> None:
         client: The test client instance.
 
     """
-    response = client.post("/uploadfile/")
+    response = client.post("/api/file/")
     expected_code = 400
     assert response.status_code == expected_code
     assert response.json() == {"message": "No file uploaded"}
