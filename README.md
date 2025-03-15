@@ -3,6 +3,12 @@
 ```bash
 # docker-compose で起動
 docker compose up
+```
+
+## その他のコマンド
+```bash
+# build する場合
+docker compose up --build
 
 # コンテナに入る
 docker compose exec fast-api bash

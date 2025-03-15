@@ -7,11 +7,16 @@ WORKDIR /app
 # pyproject.toml をコピー
 COPY pyproject.toml .
 
+# entrypoint.sh をコピー
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+
 # 依存関係をインストール
 RUN uv sync
 
 # アプリケーションのソースコードをコピー
 COPY src ./src
 
-# FastAPI サーバーを起動
-CMD ["uv", "run", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# entrypoint.sh を実行
+ENTRYPOINT ["/entrypoint.sh"]
