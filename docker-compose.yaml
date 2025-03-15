@@ -1,14 +1,29 @@
 version: '3.8'  # 使用するDocker Composeのバージョン
 
 services:
+  # database
+  db:
+    image: postgres:16  # イメージ名
+    container_name: postgres-container  # コンテナ名
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}  # ユーザ名
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}  # パスワード
+      POSTGRES_DB: ${POSTGRES_DB}  # データベース名
+    ports:
+      - "5432:5432"  # ホストの5432番ポートとコンテナの5432番ポートを紐づけ
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # ボリュームをマウント
 
   # backend
   fast-api:  # サービス名
     build: ./backend  # ビルドするDockerfileの場所
     ports:
       - "8000:8000"  # ホストの8000番ポートとコンテナの8000番ポートを紐づけ
-    volumes:
-      - ./backend/src:/app/src  # ホストマシンとコンテナの/appディレクトリを同期
+    environment:
+      - ENV=production  # 本番環境で起動
+      - DEBUG=False  # デバッグモードをオフ
+    depends_on:
+      - db  # dbサービスが起動してからfast-apiサービスを起動
     container_name: fast-api-container  # コンテナ名
   
   # frontend
@@ -17,3 +32,7 @@ services:
     ports:
       - "3000:3000" # ホストの3000番ポートとコンテナの3000番ポートを紐づけ
     container_name: nextjs-container # コンテナ名
+
+volumes:
+  # データベースのデータを永続化するためのボリューム
+  postgres_data:

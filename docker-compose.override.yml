@@ -1,0 +1,10 @@
+# 開発環境用の設定
+version: '3.8'
+
+services:
+  fast-api:
+    volumes:
+      - ./backend/src:/app/src # コードの変更をリアルタイムに反映
+    environment:
+      - ENV=development # 開発環境で起動
+      - DEBUG=True      # デバッグモードを有効化
