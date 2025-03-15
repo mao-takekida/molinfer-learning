@@ -11,8 +11,8 @@ services:
   
   nextjs:
     volumes:
-      - ./frontend/app:/app/app # コードの変更をリアルタイムに反映
-      - node_modules:/app/node_modules # node_modulesを永続化することで、速度を向上
+      - ./frontend/src:/app/src # コードの変更をリアルタイムに反映
+      - node_modules:/app/node_modules
     environment:
       - NODE_ENV=development # 開発環境で起動
     command: ["npm", "run", "dev"] # 開発用のコマンドを実行
