@@ -11,6 +11,3 @@ __pycache__/
 
 # pytest
 .coverage
-
-# env
-.env
