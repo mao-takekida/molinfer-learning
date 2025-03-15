@@ -8,3 +8,10 @@ services:
     environment:
       - ENV=development # 開発環境で起動
       - DEBUG=True      # デバッグモードを有効化
+  
+  nextjs:
+    volumes:
+      - ./frontend:/app # コードの変更をリアルタイムに反映
+    environment:
+      - NODE_ENV=development # 開発環境で起動
+    command: ["npm", "run", "dev"] # 開発用のコマンドを実行

@@ -14,7 +14,7 @@ def setup_routes(app: FastAPI) -> None:
         """Redirect root path to API documentation."""
         return RedirectResponse(url="/docs")
 
-    @app.post("/uploadfile/")
+    @app.post("/api/file/")
     async def upload_file(file: UploadFile | None = None) -> JSONResponse:
         """
         Handle file upload endpoint.
