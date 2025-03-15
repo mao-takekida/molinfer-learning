@@ -1,5 +1,5 @@
 # nodejs のイメージをベースにする
-FROM node:23-alpine
+FROM node:23-slim
 
 # 作業ディレクトリを /app に設定
 WORKDIR /app
