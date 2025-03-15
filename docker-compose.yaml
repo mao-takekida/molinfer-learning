@@ -13,6 +13,8 @@ services:
       - "5432:5432"  # ホストの5432番ポートとコンテナの5432番ポートを紐づけ
     volumes:
       - postgres_data:/var/lib/postgresql/data  # ボリュームをマウント
+    env_file:
+      - .env  # 環境変数を読み込むファイル
 
   # backend
   fast-api:  # サービス名
@@ -22,9 +24,12 @@ services:
     environment:
       - ENV=production  # 本番環境で起動
       - DEBUG=False  # デバッグモードをオフ
+      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}  # データベースのURL
     depends_on:
       - db  # dbサービスが起動してからfast-apiサービスを起動
     container_name: fast-api-container  # コンテナ名
+    volumes:
+      - file_storage:/app/uploaded_files  # ファイルの保存先
   
   # frontend
   nextjs: # サービス名
@@ -36,3 +41,5 @@ services:
 volumes:
   # データベースのデータを永続化するためのボリューム
   postgres_data:
+  # ファイルの保存先を永続化するためのボリューム
+  file_storage:

@@ -7,8 +7,11 @@ docker compose up
 
 ## その他のコマンド
 ```bash
-# build する場合
+# build もする場合
 docker compose up --build
+
+# キャッシュを使わずにビルド
+docker compose build --no-cache
 
 # コンテナに入る
 docker compose exec fast-api bash
